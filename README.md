@@ -73,6 +73,7 @@ http://wh.cs.vsb.cz/mil051/index.php/Sm%C4%9Brovac%C3%AD_protokol_IS-IS_(Interme
 -Intermediate_System_Protocol)
 https://cs.wikipedia.org/wiki/Interior_gateway_protocol
 https://cs.wikipedia.org/wiki/DECnet
+http://www.slideshare.net/shaileshpachori/master-all-home
 
 RIP, OSPF, OLSRD, EIGRP
 
