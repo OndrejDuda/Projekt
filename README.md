@@ -64,6 +64,25 @@ podporu IPv6 byl protokol IS-IS pouze rozšířen o několik nových TLV, zatím
 množiny prostředků může IS-IS podporovat více routerů v oblasti než OSPF. To přispělo k používání protokolu IS-IS jako
 protokolu pro poskytovatele Internetu.
 
+RIP(Routing Information Protocol)
+
+RIP je směrovací protokol typu distance-vector (vektor vzdálenosti) využívající Bellmanův-Fordův algoritmus pro určení nejkratší cesty v síti. Metrikou směrování je počet skoků k cílové síti (hop count). Jako ochrana proti směrovacím smyčkám je implementovaný omezený počet směrovačů (hopů) v cestě k cíli, maximální možný počet hopů je 15. Tento limit ovšem také omezuje velikost sítí ve kterých lze RIP použít (16 hopů je bráno jako nekonečná vzdálenost a používá se k označení nepřístupných, nepoužitelných směrovacích tras).
+Původně každý router s RIP vysílal aktualizované směrovací tabulky v intervalu 30 sekund. To z počátku nepředstavovalo žádný problém, jelikož směrovací tabulky nebyly tak rozsáhlé, aby se to nějak výrazněji projevilo na síťovém provozu. Vzhledem k růstu sítí (a tudíž i směrovacích tabulek) se ale toto řešení ukázalo jako nevhodné, jelikož každých 30 sekund by byla síť zahlcena velkým množstvím dat. Moderní implementace RIP toto řeší pomocí různých metod nastavujících časové intervaly každého routeru zvlášť, aby byla data rozprostřena v čase, a nedocházelo nárazově k velkým tokům dat.
+V dnešních sítích se již RIP nepovažuje za dobrou volbu, jelikož čas potřebný ke konvergenci, či rozšiřitelnost, zaostávají za ostatními protokoly jako EIGRP, OSPF, nebo IS-IS. Navíc (bez použití RIP-MTI algoritmu) je kvůli omezenému počtu hopů velmi omezená velikost sítě ve které lze RIP nasadit. Naproti tomu je ale RIP snáze konfigurovatelný než ostatní protokoly.
+RIP používá User Datagram Protocol (UDP) jako jeho transportním protokolem, a je přiřazena rezervovaný číslo portu 520.
+Počet hop nemůže překročit 15 nebo trasy bude vynechána.
+
+http://www.routeralley.com/guides/rip.pdf
+https://en.wikipedia.org/wiki/Routing_Information_Protocol
+http://www.cisco.com/c/en/us/td/docs/ios/12_2/ip/configuration/guide/fipr_c/1cfrip.pdf
+https://www.nada.kth.se/kurser/kth/2D1490/04/lectures/rip.pdf
+http://docwiki.cisco.com/wiki/Routing_Information_Protocol
+http://www.cs.cmu.edu/~./tungfai/Documents/PacketSwitching/SRIP.pdf
+http://nptel.ac.in/courses/106105080/pdf/M7L2.pdf
+http://web.cecs.pdx.edu/~jrb/routing/lectures/pdfs/RIP.pdf
+
+
+
 zdroje:
 http://www.cisco.com/en/US/products/ps6599/products_white_paper09186a00800a3e6f.shtml
 https://cs.wikipedia.org/wiki/Intermediate_System_to_Intermediate_System
