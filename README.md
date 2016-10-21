@@ -9,9 +9,7 @@ ospfv3 + security
 manualove stranky
 
 Projekt bude zpracován v následujících 3 měsících. V zásadě jde o to dozvědět se více o zabezpečení daných sítí,
-a jak fungují. První měsíc během učení na CCNA 2 budou zpracovány první 2 části, což je bezpečnost IPv4 a IPv6. V říjnu
-budu pracovat na Multi area ospf a ospfv3 + security. V listopadu začnu s prezentací a pokud zbyde čas, tak vytvořím i
-manuálové stránky.
+a jak fungují. Během prvních 2 měsíců učení na CCNA 2 budou zpracovány první 2 části, což jsou informace o routovacích protokolech a jednoduché ukázky o nich. V říjnubudu pracovat na Multi area ospf a ospfv3 + security. V listopadu začnu s prezentací a pokud zbyde čas, tak vytvořím i manuálové stránky.
 
 Intermediate System to Intermediate System(IS-IS)
 
@@ -153,8 +151,7 @@ http://web.cecs.pdx.edu/~jrb/routing/lectures/pdfs/RIP.pdf
 
 EIGRP - Enhanced Interior Gateway Routing Protocol
 Vlastnosti EIGRP
-proprietálním Cisco protokol, rozšíření staršího IGRP, jedná se o rozšířený (Advanced) Distance-Vector Routing Protocol, obsahuje i některé vlastnosti z link-state routing protokolu
-používá DUAL algoritmus - Diffusing Update based algorithm
+proprietálním Cisco protokol, rozšíření staršího IGRP, jedná se o rozšířený (Advanced) Distance-Vector Routing Protocol, obsahuje i některé vlastnosti z link-state routing protokolu používá DUAL algoritmus - Diffusing Update based algorithm
 proti IGRP - rychlejší konvergence, větší rozšiřitelnost, smyčky jsou téměř vyloučeny (díky DUAL algoritmu) - zasílá pouze změny, neperiodicky
 jedná se o classless protokol, používá CIDR a VLSM (variable length subnet masks) - jako masku zasílá délku prefixu pro každý cílový subnet
 sestavuje vztahy se sousedy zvané sousedství (adjacency), sousedy objevuje pomocí Hello paketů, které se zasílají každých 5s na rychlých a 60s na pomalých linkách
