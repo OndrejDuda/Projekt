@@ -1,6 +1,6 @@
 Směrovací informační protokol (RIP)
 
-historie:
+Historie:
 Směrovací informační protokol neboli RIP, jak bývá často nazýván, je jedním z nejdéle používaných směrovacích protokolů. RIP si
 můžete snadno splést, protože bylo stále více podobných protokolů. Některé z nich používaly i stejné jméno. RIP a nesčetně 
 pododobné protokoly byly založeny na stejném algoritmu, který používal vektory pro matematický výpočet zahrnující směrovaní k
@@ -23,7 +23,7 @@ RIP obsahuje množství dalších funkcí stability, které často obsahují jin
 pro zajišťování stability kvůli potencionálně rychlým změnám v síťové topologii. Například, RIP rozdělí část sítě 
 a zdržující mechanismus udrží siť dole, dokud nebude úprava provedena, aby se nemnožily nesprávné směrovací informace. 
 
-popis:
+Popis:
 RIP je směrovací protokol typu distance-vector (vektor vzdálenosti) využívající Bellmanův-Fordův algoritmus pro určení 
 nejkratší cesty v síti. Metrikou směrování je počet skoků k cílové síti (počet skoků). Jako ochrana proti směrovacím smyčkám 
 je implementovaný omezený počet směrovačů (hopů) v cestě k cíli, maximální možný počet hopů je 15. Tento limit ovšem také 
