@@ -74,20 +74,72 @@ http://wh.cs.vsb.cz/mil051/index.php/Sm%C4%9Brovac%C3%AD_protokol_IS-IS_(Interme
 https://cs.wikipedia.org/wiki/Interior_gateway_protocol
 https://cs.wikipedia.org/wiki/DECnet
 http://www.slideshare.net/shaileshpachori/master-all-home
+http://www.samuraj-cz.com/clanek/cisco-routing-4-is-is-intermediate-system-to-intermediate-system/
+
+--------------------------------------------------------------------------------------------------------------------------------
 
 Routing Information Protocol(RIP)
+
+history:
+The Routing Information Protocol, or RIP, as it is more commonly called, is one of the most enduring of all routing protocols. RIP is also one of the more easily confused protocols because a variety of RIP-like routing protocols proliferated, some of which even used the same name! RIP and the myriad RIP-like protocols were based on the same set of algorithms that use distance vectors to mathematically compare routes to identify the best path to any given destination address. These algorithms emerged from academic research that dates back to 1957.
+
+Routing Updates
+
+RIP sends routing-update messages at regular intervals and when the network topology changes. When a router receives a routing update that includes changes to an entry, it updates its routing table to reflect the new route. The metric value for the path is increased by 1, and the sender is indicated as the next hop. RIP routers maintain only the best route (the route with the lowest metric value) to a destination. After updating its routing table, the router immediately begins transmitting routing updates to inform other network routers of the change. These updates are sent independently of the regularly scheduled updates that RIP routers send.
+
+RIP Stability Features
+
+RIP prevents routing loops from continuing indefinitely by implementing a limit on the number of hops allowed in a path from the source to a destination. The maximum number of hops in a path is 15. If a router receives a routing update that contains a new or changed entry, and if increasing the metric value by 1 causes the metric to be infinity (that is, 16), the network destination is considered unreachable. The downside of this stability feature is that it limits the maximum diameter of a RIP network to less than 16 hops.
+RIP includes a number of other stability features that are common to many routing protocols. These features are designed to provide stability despite potentially rapid changes in a network's topology. For example, RIP implements the split horizon and holddown mechanisms to prevent incorrect routing information from being propagated.
 
 popis:
 RIP je směrovací protokol typu distance-vector (vektor vzdálenosti) využívající Bellmanův-Fordův algoritmus pro určení nejkratší cesty v síti. Metrikou směrování je počet skoků k cílové síti (hop count). Jako ochrana proti směrovacím smyčkám je implementovaný omezený počet směrovačů (hopů) v cestě k cíli, maximální možný počet hopů je 15. Tento limit ovšem také omezuje velikost sítí ve kterých lze RIP použít (16 hopů je bráno jako nekonečná vzdálenost a používá se k označení nepřístupných, nepoužitelných směrovacích tras).
 Původně každý router s RIP vysílal aktualizované směrovací tabulky v intervalu 30 sekund. To z počátku nepředstavovalo žádný problém, jelikož směrovací tabulky nebyly tak rozsáhlé, aby se to nějak výrazněji projevilo na síťovém provozu. Vzhledem k růstu sítí (a tudíž i směrovacích tabulek) se ale toto řešení ukázalo jako nevhodné, jelikož každých 30 sekund by byla síť zahlcena velkým množstvím dat. Moderní implementace RIP toto řeší pomocí různých metod nastavujících časové intervaly každého routeru zvlášť, aby byla data rozprostřena v čase, a nedocházelo nárazově k velkým tokům dat.
 V dnešních sítích se již RIP nepovažuje za dobrou volbu, jelikož čas potřebný ke konvergenci, či rozšiřitelnost, zaostávají za ostatními protokoly jako EIGRP, OSPF, nebo IS-IS. Navíc (bez použití RIP-MTI algoritmu) je kvůli omezenému počtu hopů velmi omezená velikost sítě ve které lze RIP nasadit. Naproti tomu je ale RIP snáze konfigurovatelný než ostatní protokoly.
 
-RIP používá User Datagram Protocol (UDP) jako jeho transportním protokolem, a je přiřazena rezervovaný číslo portu 520.
-Počet hop nemůže překročit 15 nebo trasy bude vynechána.Aktualizuje se každých 30 sekund.RIPv1 používá broadcast a RIPv2 multicast.
+Other characteristics of RIP include:
+• RIP supports IP and IPX routing.
+• RIP utilizes UDP port 520
+• RIP routes have an administrative distance of 120.
+• RIP has a maximum hopcount of 15 hops.
 
-------------------------------------------------------rip to ospf---------------------------------------------------------------
+RIP adheres to the following Distance Vector characteristics:
+• RIP sends out periodic routing updates (every 30 seconds)
+• RIP sends out the full routing table every periodic update
+• RIP uses a form of distance as its metric (in this case, hopcount)
+• RIP uses the Bellman-Ford Distance Vector algorithm to determine
+the best “path” to a particular destination 
 
-http://www.samuraj-cz.com/clanek/cisco-routing-4-is-is-intermediate-system-to-intermediate-system/
+RIP Versions
+RIP has two versions, Version 1 (RIPv1) and Version 2 (RIPv2).
+RIPv1 (RFC 1058) is classful, and thus does not include the subnet mask
+with its routing table updates. Because of this, RIPv1 does not support
+Variable Length Subnet Masks (VLSMs). When using RIPv1, networks
+must be contiguous, and subnets of a major network must be configured with
+identical subnet masks. Otherwise, route table inconsistencies (or worse)
+will occur.
+RIPv1 sends updates as broadcasts to address 255.255.255.255.
+RIPv2 (RFC 2543) is classless, and thus does include the subnet mask with
+its routing table updates. RIPv2 fully supports VLSMs, allowing
+discontiguous networks and varying subnet masks to exist.
+Other enhancements offered by RIPv2 include:
+• Routing updates are sent via multicast, using address 224.0.0.9
+• Encrypted authentication can be configured between RIPv2 routers
+• Route tagging is supported (explained in a later section)
+RIPv2 can interoperate with RIPv1. By default:
+• RIPv1 routers will sent only Version 1 packets
+• RIPv1 routers will receive both Version 1 and 2 updates
+• RIPv2 routers will both send and receive only Version 2 updates 
+
+So why use RIP?
+• RIP is easy to implement →
+– Many different implementations.
+– The protocol has been rigorously tested by many
+teams of developers.
+• In a small network, RIP has very little overhead in
+terms of bandwidth, memory consumption,
+processor load, etc.
+
 http://www.routeralley.com/guides/rip.pdf
 https://en.wikipedia.org/wiki/Routing_Information_Protocol
 http://www.cisco.com/c/en/us/td/docs/ios/12_2/ip/configuration/guide/fipr_c/1cfrip.pdf
@@ -241,6 +293,7 @@ point-to-multipoint (PtoM) - jeden interface, který se připojuje k více cíl�
 http://www.samuraj-cz.com/clanek/cisco-routing-3-ospf-open-shortest-path-first/
 
 --------------------------------------------------------------------------------------------------------------------------------
+------------------------------------------------------rip to ospf---------------------------------------------------------------
 
 
 
