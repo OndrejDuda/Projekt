@@ -1,6 +1,6 @@
 Routing Information Protocol(RIP)
 
-history:
+History:
 The Routing Information Protocol, or RIP, as it is more commonly called, is one of the most enduring of all routing protocols. 
 RIP is also one of the more easily confused protocols because a variety of RIP-like routing protocols proliferated, some of 
 which even used the same name! RIP and the myriad RIP-like protocols were based on the same set of algorithms that use distance 
@@ -27,7 +27,7 @@ RIP includes a number of other stability features that are common to many routin
 provide stability despite potentially rapid changes in a network's topology. For example, RIP implements the split horizon 
 and holddown mechanisms to prevent incorrect routing information from being propagated.
 
-description:
+Description:
 RIP is a type of distance-vector routing protocol (vektor distance) using Bellman-Ford algoritm for specifying best way in 
 network. Metric of routing is count of jumps to final destination (hop count). As protection against routing loops is 
 implements limited number of routing hops to destination, maximal number of hops is 15. This limit also limits size of networks 
