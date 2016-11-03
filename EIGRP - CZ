@@ -1,0 +1,65 @@
+EIGRP - Enhanced Interior Gateway Routing Protocol
+
+Historie EIGRP
+Než EIGRP vznikl byl IGRP, Interior Gatway Routing Protocol. Cisco vytvoříl IGRP v 80. letech jako odpověď 
+na limitaci RIP, má daleko více možných skoků než RIP.
+
+Základní informace
+EIGRP je proprietálním Cisco protokolem, rozšíření staršího IGRP, jedná se o rozšířený Distance-Vector Routing Protocol, 
+obsahuje i některé vlastnosti z link-state routing protokolu používá DUAL algoritmus - Diffusing Update based algorithm.
+Oproti IGRP - rychlejší konvergence, větší rozšiřitelnost, smyčky jsou téměř vyloučeny (díky DUAL algoritmu) - zasílá pouze 
+změny, neperiodicky jedná se o classless protokol. Používá CIDR a VLSM (variable length subnet masks) - jako masku zasílá 
+délku prefixu pro každý cílový subnet sestavuje vztahy se sousedy zvané sousedství (adjacency), sousedy objevuje pomocí 
+Hello paketů, které se zasílají každých 5s na rychlých a 60s na pomalých linkách.
+Podporuje IP, IPv6, IPX, AppleTalk maximálně zabere (v základním nastavení) 50% propustnosti interfacu.
+Feasible successor (FS), možný náhradník je náhradník směrovaní, má taky přístup do dané sítě s jinou metrikou, je zaznamenaný
+v topologické tabulce. Hodnota možných sousedů je vypočítaná od vzdálenosti routeru k cíli.
+Pokud router nemá žádný feasible successor, tak se přepne do aktivního stavu a dotáže se sousedů Stuck In Active (SIA) - stav, 
+kdy je cesta v aktivním stavu, router odešle Query a v určitém stavu neobdrží odpověď, v tom případě EIGRP vyřadí tyto sousedy 
+routovací tabulky (update směrovací informace) se předávají pomocí multicastu na 224.0.0.10, pokud je to možné, jinak se 
+použije unicast (opakování nepotvrzeného updatu, rozhranní bez podpory multicastu, ručně zadaní sousedé) nestejnoměrné 
+vyvažování zátěže.
+
+Výpočet hodnoty pro FS
+delay metric = ([(K1 * bandwidth) + [(K2 * bandwidth) ÷ (256 - load)] + (K3 * delay)] * [K5 ÷ (reliability + K4)]) * 256 = 
+= cca = (bandwith + delay) * 256
+
+Základní termíny EIGRP Successor
+Je primární routa k cíli, ukládá se do routovací tabulky, může být více succesorů ke stejnému cíli 
+Feasible Successor - záložní cesta (backup route), ukládá se do tabulky topologie, může být více feasible succesorů ke 
+stejnému cíli, její RD je menší než FD současné nejlepší cesty Reported Distance (RD) - nebo také Advertised Distance (AD), 
+je nejnižší celková metrika (vzdálenost) podél cesty do cílové sítě (přes succesory) zaslaná sousedem 
+Feasible Distance (FD) - je RD + cena k dosažení souseda, který zaslal RD Feasibility Condition (FC) - je dostačující 
+podmínka k dosažení sítě bez smyček, používá se při volbě succesora a feasible succesora, říká, že pokud je RD je vetsi nez 
+FD pro určitý cíl, tak leží na cestě bez smyček.
+
+
+Pakety posílané v EIGRP
+Hello - multicast, zasílání nespolehlivě (nevyžaduje potvrzování), objevování sousedů (discover), identifikace nefunkčních routerů, posílá (interval) se každých 5s na rychlých linkách nebo každých 60s, hold time pro hello paket je 3 x hello interval
+Acknowledgement - unicast, nespolehlivě, hello bez dat s číslem potvrzení
+Query - multicast, doručování spolehlivě, zasílá se při přepnutí do aktivního stavu
+Reply - unicast, doručování spolehlivě, odpověď na query
+Update - multicast, doručování spolehlivě (reliably), zprostředkovává dostupnost, soused si pomocí nich sestaví topology table
+
+Tabulky pro EIGRP
+routovací (routing) - nejlepší routy do destinací
+topologie (topology) - routovací záznamy do všech destinací
+sousedé (neighbors) - informace o sousedních routerech (adjacent)
+
+Používá se pro topologii Hub and Spoke (model kola - střed kola a paprsky, obdoba topologie hvězda)
+jako stub se konfigurují pouze vzdálené routery (spoke) jako sousedi stub routeru by měli být pouze EIGRP hub 
+routery (distribution) snižuje využití zdrojů, zvyšuje síťovou stabilitu a zjednodušuje konfiguraci stub routeru
+Stub router směruje pakety pouze do sítě, kterou explicitně zveřejnil, proto mu Hub router neposílá Query
+stub router oznamuje (advertised) pouze summary a connected routes neptáme se stub routeru na jich routy.
+
+Výhody, které EIGRP nad RIP;
+
+Nestejná hodnota sdílení zátěže
+Aktualizační doba třikrát kratší než u RIP
+Více efektivní aktualizační formát paketů
+
+http://www.samuraj-cz.com/clanek/cisco-routing-2-eigrp-enhanced-interior-gateway-routing-protocol/ cz
+http://ericleahy.com/index.php/eigrp-part-one/ en
+http://docwiki.cisco.com/wiki/Enhanced_Interior_Gateway_Routing_Protocol en
+
+
