@@ -1,0 +1,78 @@
+OSPF 
+
+Vlastnosti OSPF
+Otevřený standard, asi nejrozšířenější IGP protokol ve větších firmách, jedná se o classless protokol / podporuje VLSM, 
+používá Dijkstrův algoritmus nejkratší cesty - SPF, spolupracuje s MPLS (Multi Protocol Label Switching) - udržuje routovací 
+tabulky velké OSPF sítě je vhodné rozdělovat do oblastí (areas) - sníží se výpočet SPF, menší routovací tabulky, snížení 
+LSU (link-state update), díky oblastem podporuje hierarchický síťový design, používá link-state databázi, která předchází 
+smyčkám pro snižování routovacích tabulek se může použít manuální sumarizace, ale automatická není podporována
+routovací updaty se posílají, pouze pokud jsou potřeba využívá multicast (takže neovlivňuje stanice a ostatní zařízení bez 
+OSPF), 224.0.0.6 - všechny DR (Designated Router)  a BDR (Backup Designated Router), 224.0.0.5 - všechny routery,
+224.0.0.2 - všechny routery na stejném subnetu. Nepoužívá TCP, ale IP protokol 89, sám si řeší detekci a opravu chyb, 
+podporuje autentizaci, plain text nebo MD5, pro akceptování LSA (link-state advertisement),
+používá hello protokol - lepší než výměna tabulek v RIP, pomocí něj navazuje sousedství, posílá každých 10s,
+aby se routery staly sousedy, hello paket musí mít shodné hodnoty - číslo oblasti, typ oblasti (stub nebo NSSA flag), 
+subnet a subnet mask, hello a dead timer, autentizační údaje.
+LSA se odesílá každých 30min nebo při změně, šíří se pomocí flooding (zaplavování), cena linky pro OSPF 
+cost = 100Mb / bandwidth. OSPF router ID (nastavuje se při restartu) je nejvyšší IP adresa (aktivní) na routeru nebo adresa 
+loopback interfacu (to je doporučeno, protože je stále up). 
+DR/BDR volba je podle nastavené priority nebo podle Router ID, probíhá pouze v multi-access sítích, ne v point-to-point, 
+když DR selže, tak BDR se stane DR a zvolí se nový BDR,  pokud původní DR naběhne, tak se nestane automaticky 
+DR (pouze až selže DR i BDR), pokud nějaká oblast nemůže být přímo připojena do backbone, může být připojena do jiné 
+oblasti, která je přímo do oblasti 0, a musí se vytvořit virtuální link (logická cesta do backbone skrze tranzitní oblast) -
+- je identifikována pomocí router id sousedního routeru (pokud se zadá špatně, tak se nevytvoří) hranice oblastí jsou 
+definovány uvnitř routeru na routeru může běžet až 30 OSPF routing proces.
+
+Tabulky pro OSPF
+routovací (routing) - nejlepší routy do destinací
+topologie (topology) - routovací záznamy do všech destinací
+sousedů (adjacency) - informace o sousedních routerech
+link-state database - stejná pro všechny routery, synchronizace pomocí zaplavení LSA, pomocí ní se vytvoří routovací tabulky, obraz síťové topologie ve stromové struktuře
+OSPF routes (typy záznamů)
+O - OSPF síť ve stejné oblasti (intra-area)
+O IA - OSPF inter-area, z ABR (LSA 3 a 4)
+O* IA - default OSPF inter-area
+O N1 - OSPF NSSA external type 1
+O* N2 - default OSPF NSSA external type 2
+O E1 - OSPF external type 1, z ASBR,
+O* E2 - default OSPF external type 2
+
+Typy OSPF oblastí (area)
+standard area - přijímá link updaty a sumární routy i externí
+backbone area - propojení všech ostatních oblastí, vždy Area 0, stejné vlastnosti jako standard
+stub area - nepřijímá routy z ostatních AS (autonomus system), pro směrování mimo AS se použije defaultní routa, 
+O, O IA, O* IA
+totally stubby area - Cisco proprietální, nepřijímá sumární routy mimo jeho oblast, O, O* IA
+not-so-stubby area (NSSA) - obdoba stuby, ale importuje některé externí routy typu 7 LSA a převádí je na typ 
+5 LSA, O, O IA, O N2, O* N2
+
+Typy routerů v OSPF
+Area Border Router - ABR - má interfacy ve více oblastech, pro každou oblast má separátní tabulku link-state, připojuje 
+oblasti do backbone
+Autonomous System Border Router - ASBR - má interfacy ve více AS, slouží k distribuci route z jiné AS, většinou zde běží i BGP
+Internal Router - běžný, pouze v jedné oblasti
+Backbone Router - alespoň jeden interface v Area 0
+
+DR/BDR routery
+Designated Router - DR - posílá LSA 2 všem sousedům v multi-access, je to router (přesněji interface routeru), který se volí 
+v rámci segmentu u multiaccess (speciálními technikami i u NBMA), slouží k redukci síťového provozu, DR je zdrojem 
+routovacích updatu, udržuje si kompletní tabulku topologie, všechny ostatní routery s ním navazují spojení
+Backup Designated Router - BDR - stává se DR, pokud selže původní DR, má druhou nejvyšší prioritu v době volby
+
+Link State Advertisements - LSA v OSPF
+typ 1 - router, informace o routeru a jeho přímo připojených interfacech, pouze v rámci oblasti, generuje každý router
+typ 2 - network, informace o LAN a routerech v ní, v multi-access network pochází z DR, pouze v oblasti
+typ 3 - summary, pochází z ABR (Area Border Router), sítě dostupné mimo oblast, pro ABR
+typ 4 - ASBR summary, pochází z ABR, pro ASBR
+typ 5 - external AS, oznamuje externí routy (default route), pochází z ASBR, v rámci AS
+typ 6 - multicast info
+typ 7 - ostatní rozšíření - NSSA
+
+Typy sítí - network types
+broadcast multi-access (BMA) - sdílené médium, ethernet, volí se DR a BDR automaticky
+nonbroadcast multi-access (NBMA) - bez subinterfaců, klasicky serial Frame Relay, DR a BDR vyžaduje ručně definované sousedy
+point-to-point (PtoP)- spojení dvou routerů, nepotřebuje DR a BDR
+point-to-multipoint (PtoM) - jeden interface, který se připojuje k více cílům (pomocí subinterfaců), série point-to-point 
+okruhů, nedochází k volbě DB/BDR, často serial Frame Relay, automaticky formuje sousedství (nemusí se ručně definovat)
+
+http://www.samuraj-cz.com/clanek/cisco-routing-3-ospf-open-shortest-path-first/
