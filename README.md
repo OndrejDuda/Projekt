@@ -153,6 +153,7 @@ http://web.cecs.pdx.edu/~jrb/routing/lectures/pdfs/RIP.pdf
 EIGRP - Enhanced Interior Gateway Routing Protocol
 
 Vlastnosti EIGRP
+
 proprietálním Cisco protokol, rozšíření staršího IGRP, jedná se o rozšířený (Advanced) Distance-Vector Routing Protocol, obsahuje i některé vlastnosti z link-state routing protokolu používá DUAL algoritmus - Diffusing Update based algorithm
 proti IGRP - rychlejší konvergence, větší rozšiřitelnost, smyčky jsou téměř vyloučeny (díky DUAL algoritmu) - zasílá pouze změny, neperiodicky jedná se o classless protokol, používá CIDR a VLSM (variable length subnet masks) - jako masku zasílá délku prefixu pro každý cílový subnet sestavuje vztahy se sousedy zvané sousedství (adjacency), sousedy objevuje pomocí Hello paketů, které se zasílají každých 5s na rychlých a 60s na pomalých linkách
 aby dva routery mohly být sousedy, tak musí být členy stejného AS (Autonomous system) a mít stejné K values (konstanty pro výpočet metriky), také stejná verze EIGRP (zatím se nepoužívá), interface na stejném subnetu, stejný MD5 hash
