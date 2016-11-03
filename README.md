@@ -147,25 +147,19 @@ http://www.cs.cmu.edu/~./tungfai/Documents/PacketSwitching/SRIP.pdf
 http://nptel.ac.in/courses/106105080/pdf/M7L2.pdf
 http://web.cecs.pdx.edu/~jrb/routing/lectures/pdfs/RIP.pdf
 
---------------------------------------------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------------------------------
+
 
 EIGRP - Enhanced Interior Gateway Routing Protocol
+
 Vlastnosti EIGRP
 proprietálním Cisco protokol, rozšíření staršího IGRP, jedná se o rozšířený (Advanced) Distance-Vector Routing Protocol, obsahuje i některé vlastnosti z link-state routing protokolu používá DUAL algoritmus - Diffusing Update based algorithm
-proti IGRP - rychlejší konvergence, větší rozšiřitelnost, smyčky jsou téměř vyloučeny (díky DUAL algoritmu) - zasílá pouze změny, neperiodicky
-jedná se o classless protokol, používá CIDR a VLSM (variable length subnet masks) - jako masku zasílá délku prefixu pro každý cílový subnet
-sestavuje vztahy se sousedy zvané sousedství (adjacency), sousedy objevuje pomocí Hello paketů, které se zasílají každých 5s na rychlých a 60s na pomalých linkách
+proti IGRP - rychlejší konvergence, větší rozšiřitelnost, smyčky jsou téměř vyloučeny (díky DUAL algoritmu) - zasílá pouze změny, neperiodicky jedná se o classless protokol, používá CIDR a VLSM (variable length subnet masks) - jako masku zasílá délku prefixu pro každý cílový subnet sestavuje vztahy se sousedy zvané sousedství (adjacency), sousedy objevuje pomocí Hello paketů, které se zasílají každých 5s na rychlých a 60s na pomalých linkách
 aby dva routery mohly být sousedy, tak musí být členy stejného AS (Autonomous system) a mít stejné K values (konstanty pro výpočet metriky), také stejná verze EIGRP (zatím se nepoužívá), interface na stejném subnetu, stejný MD5 hash
-defaultně používá autosumarizaci přes classful hranice - zajišťuje, aby routovací tabulky byly co nejvíce kompaktní, můžeme vypnout no auto-summary, to je třeba v případě, kdy máme nespojitý adresní prostor (při sumarizaci by se zahrnuly i adresy, které jsou mimo naši síť)
-můžeme použít manuální sumarizaci per interface, jako cíl (destination) se nastaví Null0
-podporuje IP, IPv6, IPX, AppleTalk
-maximálně zabere (v defaultním nastavení) 50% propustnosti interfacu (údaj získává z bandwidth)
-metrika je pomocí 32 bitových hodnot, většinou se používá pouze šířka pásma a delay
-metric = ([(K1 * bandwidth) + [(K2 * bandwidth) ÷ (256 - load)] + (K3 * delay)] * [K5 ÷ (reliability + K4)]) * 256 = cca = (bandwith + delay) * 256
-pokud router nemá žádný feasible successor, tak se přepne do aktivního stavu a dotáže se sousedů
-Stuck In Active (SIA) - stav, kdy je cesta v aktivním stavu, router odešle Query a v určitém stavu neobdrží odpověď, v tom případě EIGRP vyřadí tyto sousedy
-routovací tabulky (update směrovací informace) se předávají pomocí multicastu na 224.0.0.10, pokud je to možné, jinak se použije unicast (opakování nepotvrzeného updatu, rozhranní bez podpory multicastu, ručně zadaní sousedé)
-nestejnoměrné vyvažování zátěže (unequal cost path load balancing) - používá proměnnou variance, standardně se zvolí cesta s nejmenší metrikou (FD), pokud je takových cest více (mají stejné FD), tak se použije stejnoměrné rozvažování; pokud zadáme variance, tak se použijí všechny cesty, které mají metriku menší než variance*minimální metrika do cíle (metrika <= variance*FD). Použijí se ale pouze cesty, které jsou feasible successor, tedy pro které platí RD<FD (=cesta od souseda do cíle je menší než nejkratší cesta).
+defaultně používá autosumarizaci přes classful hranice - zajišťuje, aby routovací tabulky byly co nejvíce kompaktní, můžeme vypnout no auto-summary, to je třeba v případě, kdy máme nespojitý adresní prostor (při sumarizaci by se zahrnuly i adresy, které jsou mimo naši síť) můžeme použít manuální sumarizaci per interface, jako cíl (destination) se nastaví Null0
+podporuje IP, IPv6, IPX, AppleTalk maximálně zabere (v defaultním nastavení) 50% propustnosti interfacu (údaj získává z bandwidth) metrika je pomocí 32 bitových hodnot, většinou se používá pouze šířka pásma a delay
+metric = ([(K1 * bandwidth) + [(K2 * bandwidth) ÷ (256 - load)] + (K3 * delay)] * [K5 ÷ (reliability + K4)]) * 256 = cca = (bandwith + delay) * 256 pokud router nemá žádný feasible successor, tak se přepne do aktivního stavu a dotáže se sousedů
+Stuck In Active (SIA) - stav, kdy je cesta v aktivním stavu, router odešle Query a v určitém stavu neobdrží odpověď, v tom případě EIGRP vyřadí tyto sousedy routovací tabulky (update směrovací informace) se předávají pomocí multicastu na 224.0.0.10, pokud je to možné, jinak se použije unicast (opakování nepotvrzeného updatu, rozhranní bez podpory multicastu, ručně zadaní sousedé) nestejnoměrné vyvažování zátěže (unequal cost path load balancing) - používá proměnnou variance, standardně se zvolí cesta s nejmenší metrikou (FD), pokud je takových cest více (mají stejné FD), tak se použije stejnoměrné rozvažování; pokud zadáme variance, tak se použijí všechny cesty, které mají metriku menší než variance*minimální metrika do cíle (metrika <= variance*FD). Použijí se ale pouze cesty, které jsou feasible successor, tedy pro které platí RD<FD (=cesta od souseda do cíle je menší než nejkratší cesta).
 
 Základní termíny EIGRP
 Successor - primární routa k cíli, ukládá se do routovací tabulky, může být více succesorů ke stejnému cíli
