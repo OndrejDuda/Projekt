@@ -290,4 +290,4 @@ http://www.samuraj-cz.com/clanek/cisco-routing-3-ospf-open-shortest-path-first/
 
 
 RIP, OSPF, OLSRD, EIGRP
-
+http://www.cs.vsb.cz/grygarek/SPS/lect/OSPF/ospf.html
