@@ -39,3 +39,38 @@ Regular area (Non-backbone) :
 
 •  A regular area does not allow traffic from another area to use its links to reach other areas. All traffic from other areas 
    must cross through area 0.
+
+
+
+OSPFv2 and OSPFv3 Compared
+
+Many aspects of the OSPF routing protocol remain the same between OSPFv2 and OSPFv3; such as the LSA flooding rules, the LSA aging 
+mechanisms, and the interface types (broadcast, point-to-point, point-to-multipoint, among others). OSPFv3 Packet and LSA formats 
+differ from OSPFv2. Specifically, OSPFv3 adds two new LSA types for Link (0x0008, tells neighbors about link-local addresses and IPv6 
+prefixes on link) and Intra-Area-Prefix (0x2009, IPv6 prefixes connected to a router). OSPFv2 has two flooding scope, AS wide and area 
+wide but now OSPFv3 has three flooding scopes (noted with the S1 and S2 bits).
+
+Here is a list of the similarities between OSPFv2 and OSPFv3:
+
+Both are link-state Interior Gateway Protocol (IGP) routing protocols
+Both use a 2-level hierarchy with Area 0.0.0.0 at the core
+Both use Area Border Routers (ABRs) and Autonomous System Boundary Routers (ASBRs)
+Both use the Shortest Path First (SPF) calculation within each area utilizing Edsger Dijkstra's SPF algorithm
+Both use metrics that are based on interface bandwidth (or manual configuration)
+Both have 5 common protocol packet types: Hello, Database description (DBD), Link-state request (LSR), Link-state update (LSU), 
+Link-state acknowledgment (LSA)
+They use similar interface types: Broadcast, P2P, P2MP, NBMA, and Virtual-Links
+They have the same LSA flooding and aging timers
+Here is a list of the differences between OSPFv2 and OSPFv3:
+They use different address families (OSPFv2 is for IPv4-only, OSPFv3 can be used for IPv6-only or both protocols 
+(more on this following))
+
+OSPFv3 introduces new LSA types
+OSPFv3 has different packet format
+OSPFv3 uses different flooding scope bits (U/S2/S1)
+OSPFv3 adjacencies are formed over link-local IPv6 communications
+OSPFv3 runs per-link rather than per-subnet
+OSPFv3 supports multiple instances on a single link, Interfaces can have multiple IPv6 addresses
+OSPFv3 uses multicast addresses FF02::5 (all OSPF routers), FF02::6 (all OSPF DRs)
+OSPFv3 Neighbor Authentication done with IPsec (AH)
+OSPFv2 Router ID (RID) must be manually configured, still a 32-bit number
