@@ -1,0 +1,76 @@
+OSPFv3 security
+
+OSPFv3 doesn’t have an authentication field in its header like OSPFv2 does, instead it relies on IPsec to get the job done.
+IPsec supports two encapsulation types. The first one is AH (Authentication Header) which as the name implies, authenticates the header. 
+The other encapsulation type is ESP (Encapsulating Security Payload) which encrypts packets. We can use both for OSPFv3 so besides 
+authentication, encryption is also a possibility.
+
+OSPFv3 uses the IP authentication header (AH) and the IP Encapsulating Security Payload (ESP) portions of the IPsec Protocol to 
+authenticate routing information between peers. AH can provide connectionless integrity and data origin authentication. It also 
+provides protection against replays. AH authenticates as much of the IP header as possible, as well as the upper-level protocol data. 
+However, some IP header fields might change in transit. Because the value of these fields might not be predictable by the sender, they 
+cannot be protected by AH. ESP can provide encryption and limited traffic flow confidentiality or connectionless integrity, data origin 
+authentication, and an anti-replay service.
+IPsec is based on security associations (SAs). An SA is a set of IPsec specifications that are negotiated between devices that are 
+establishing an IPsec relationship. This simplex connection provides security services to the packets carried by the SA. These 
+specifications include preferences for the type of authentication, encryption, and IPsec protocol to be used when establishing the 
+IPsec connection. An SA is used to encrypt and authenticate a particular flow in one direction. Therefore, in normal bidirectional 
+traffic, the flows are secured by a pair of SAs. An SA to be used with OSPFv3 must be configured manually and use transport mode.
+Static values must be configured on both ends of the SA.
+Manual SAs require no negotiation between the peers. All values, including the keys, are static and specified in the configuration. 
+Manual SAs statically define the security parameter index (SPI) values, algorithms, and keys to be used and require matching 
+configurations on both end points (OSPFv3 peers). As a result, each peer must have the same configured options for communication to 
+take place.
+
+The following restrictions apply to IPsec authentication for OSPFv3:
+
+Dynamic Internet Key Exchange (IKE) security associations (SAs) are not supported.
+Only IPsec transport mode is supported. In transport mode, only the payload (the data you transfer) of the IP packet is encrypted and/or 
+authenticated. Tunnel mode is not supported. Because only bidirectional manual SAs are supported, all OSPFv3 peers must be configured
+with the same IPsec SA. You configure a manual bidirectional SA at the [edit security ipsec] hierarchy level.You must configure the 
+same IPsec SA for all virtual links with the same remote endpoint address.
+
+In order to ensure that OSPFv3 packets are not altered and re-sent to the device, causing the device to behave in a way not desired by 
+its system administrators, OSPFv3 packets must be authenticated. OSPFv3 uses the IPsec secure socket API to add authentication to 
+OSPFv3 packets. This API supports IPv6.
+OSPFv3 requires the use of IPsec to enable authentication. Crypto images are required to use authentication, because only crypto images 
+include the IPsec API needed for use with OSPFv3.
+In OSPFv3, authentication fields have been removed from OSPFv3 packet headers. When OSPFv3 runs on IPv6, OSPFv3 requires the IPv6 
+authentication header (AH) or IPv6 ESP header to ensure integrity, authentication, and confidentiality of routing exchanges. IPv6 
+AH and ESP extension headers can be used to provide authentication and confidentiality to OSPFv3.
+To use the IPsec AH, you must enable the ipv6 ospf authentication command. To use the IPsec ESP header, you must enable the ipv6 ospf 
+encryption command. The ESP header may be applied alone or in combination with the AH, and when ESP is used, both encryption and 
+authentication are provided. Security services can be provided between a pair of communicating hosts, between a pair of communicating 
+security gateways, or between a security gateway and a host.
+To configure IPsec, you configure a security policy, which is a combination of the security policy index (SPI) and the key (the key is 
+used to create and validate the hash value). IPsec for OSPFv3 can be configured on an interface or on an OSPFv3 area. For higher 
+security, you should configure a different policy on each interface configured with IPsec. If you configure IPsec for an OSPFv3 area, 
+the policy is applied to all of the interfaces in that area, except for the interfaces that have IPsec configured directly. Once IPsec 
+is configured for OSPFv3, IPsec is invisible to you.
+The secure socket API is used by applications to secure traffic. The API needs to allow the application to open, listen, and close 
+secure sockets. The binding between the application and the secure socket layer also allows the secure socket layer to inform the 
+application of changes to the socket, such as connection open and close events. The secure socket API is able to identify the socket; 
+that is, it can identify the local and remote addresses, masks, ports, and protocol that carry the traffic requiring security.
+
+Each interface has a secure socket state, which can be one of the following:
+
+NULL: Do not create a secure socket for the interface if authentication is configured for the area.
+
+DOWN: IPsec has been configured for the interface (or the area that contains the interface), but OSPFv3 either has not requested 
+IPsec to create a secure socket for this interface, or there is an error condition.
+
+GOING UP: OSPFv3 has requested a secure socket from IPsec and is waiting for a CRYPTO_SS_SOCKET_UP message from IPsec.
+
+UP: OSPFv3 has received a CRYPTO_SS_SOCKET_UP message from IPsec.
+
+CLOSING: The secure socket for the interface has been closed. A new socket may be opened for the interface, in which case the current 
+secure socket makes the transition to the DOWN state. Otherwise, the interface will become UNCONFIGURED.
+
+UNCONFIGURED: Authentication is not configured on the interface.
+OSPFv3 will not send or accept packets while in the DOWN state.
+
+source
+http://packetlife.net/blog/2008/sep/3/ospfv3-authentication/
+http://www.cisco.com/c/en/us/td/docs/ios-xml/ios/iproute_ospf/configuration/15-sy/iro-15-sy-book/ip6-route-ospfv3-auth-ipsec.html
+https://networklessons.com/ipv6/ospfv3-authentication-and-encryption/
+http://www.juniper.net/documentation/en_US/junos15.1/topics/concept/ospfv3-authentication-overview.html
