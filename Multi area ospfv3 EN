@@ -1,0 +1,41 @@
+OSPF
+Open Shortest Path First (OSPF) is a routing protocol for IP. It is a link-state protocol, as opposed to a distance-vector protocol. 
+A link-state protocol makes routing decisions based on the states of the links that connect source and destination machines. 
+The state of a link is a description of that interface and the relationship to its neighboring networking devices. The interface 
+information includes the IPv6 prefix of the interface, the network mask, the type of network it is connected to, the routers connected 
+to that network, and so forth. This information is propagated in various type of link-state advertisements (LSAs).
+OSPF version 3, which is described in RFC 2740, supports IPv6.
+
+Before you enable OSPF for IPv6 on an interface, you must perform the following:
+Complete the OSPF network strategy and planning for your IPv6 network. For example, you must decide whether multiple areas are required.
+Enable IPv6 unicast routing.
+Enable IPv6 on the interface.
+Configure the IP Security (IPsec) secure socket application program interface (API) on OSPF for IPv6 in order to enable 
+authentication and encryption.
+
+Advantages of MultiArea OSPF .
+
+To divide your large OSPF network into area has the following advantages:
+
+•  Reduced frequency of SPF calculations: Detailed route information exists within each area, link-state changes not flooded to other 
+   areas
+
+•  Smaller routing tables: Instead of advertising these explicit routes outside the area, routers can be configured to summarize the 
+   routes into one or more summary addresses.
+
+Reduced LSU overhead: Rather than send an LSU about each network within an area, a router can advertise a single summarized route or 
+small number of routes between areas.
+
+Backbone area :
+
+Area whose primary function is the fast and efficient movement of IP packets.
+
+•  Interconnect with other OSPF area types
+•  Known as OSPF area 0 which all other areas must directly connect to.
+
+Regular area (Non-backbone) :
+
+•  Connects users and resources.
+
+•  A regular area does not allow traffic from another area to use its links to reach other areas. All traffic from other areas 
+   must cross through area 0.
