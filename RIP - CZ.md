@@ -79,6 +79,7 @@ Přiřadíme jim ip adresu: enable
                          ip address (adresa) (maska)
 Propojíme síť: conf t
                network (síť)
+               default-information originate
 ![snimek obrazovky porizeny 2016-11-16 09-18-40](https://cloud.githubusercontent.com/assets/11191013/20339667/f4637372-abdd-11e6-8faf-f252e67ad4f3.png)
 
 
