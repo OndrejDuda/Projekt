@@ -1,8 +1,7 @@
 Směrovací informační protokol (RIP)
 
 Historie
-Směrovací informační protokol neboli RIP, jak bývá často nazýván, je jedním z nejdéle používaných směrovacích protokolů. RIP si
-můžete snadno splést, protože bylo stále více podobných protokolů. Některé z nich používaly i stejné jméno. RIP a nesčetně 
+Směrovací informační protokol neboli RIP, jak bývá často nazýván, je jedním z nejdéle používaných směrovacích protokolů. RIP si můžete snadno splést, protože bylo stále více podobných protokolů. Některé z nich používaly i stejné jméno. RIP a nesčetně 
 pododobné protokoly byly založeny na stejném algoritmu, který používal vektory pro matematický výpočet zahrnující směrovaní k
 indentifikaci nejlepší cesty k cílové adrese. Algoritmus vznikl na akademickém výzkumu v roce 1957.
 
@@ -15,10 +14,7 @@ Jednotka délky se zvýší o 1 a ten co posílal zprávu zjistí další skos. 
 routerům v síti, aby změnili délky cest.
 
 RIP - funkce stability
-RIP zabraňuje směrovacím skokům pokračujícím do nekonečna zavedením limitu povolených skoků v cestě od toho, kdo je posílá až k 
-cíli. Maximální počet skoku je nastaven na 15. Pokud router dostane aktualizací informaci, která obsahuje novinku nebo změnu 
-vstupu a zvyšuje hodnotu skoků na 16, počítá to, jakoby počet skoků byl nekonečno a zprávy se stanou nedoručitelné. Kvůli 
-stabilitě tohoto protokolu je nastavený limit skoků v síti musí být menší než 16.
+RIP zabraňuje směrovacím skokům pokračujícím do nekonečna zavedením limitu povolených skoků v cestě od toho, kdo je posílá až k cíli. Maximální počet skoku je nastaven na 15. Pokud router dostane aktualizací informaci, která obsahuje novinku nebo změnu vstupu a zvyšuje hodnotu skoků na 16, počítá to, jakoby počet skoků byl nekonečno a zprávy se stanou nedoručitelné. Kvůli stabilitě tohoto protokolu je nastavený limit skoků v síti musí být menší než 16.
 RIP obsahuje množství dalších funkcí stability, které často obsahují jiné směrovací protokoly. Tyto funkce byly vytvořeny 
 pro zajišťování stability kvůli potencionálně rychlým změnám v síťové topologii. Například, RIP rozdělí část sítě 
 a zdržující mechanismus udrží siť dole, dokud nebude úprava provedena, aby se nemnožily nesprávné směrovací informace. 
@@ -34,9 +30,8 @@ problém, jelikož směrovací tabulky nebyly tak rozsáhlé, aby se to nějak v
 růstu sítí (a tudíž i směrovacích tabulek) se ale toto řešení ukázalo jako nevhodné, jelikož každých 30 sekund by byla síť 
 zahlcena velkým množstvím dat. Moderní implementace RIP toto řeší pomocí různých metod nastavujících časové intervaly každého 
 routeru zvlášť, aby byla data rozprostřena v čase, a nedocházelo nárazově k velkým tokům dat.
-V dnešních sítích se již RIP nepovažuje za dobrou volbu, jelikož čas potřebný ke konvergenci, či rozšiřitelnost, zaostávají za 
-ostatními protokoly jako EIGRP, OSPF, nebo IS-IS. Navíc (bez použití RIP-MTI algoritmu) je kvůli omezenému počtu hopů velmi 
-omezená velikost sítě ve které lze RIP nasadit. Naproti tomu je ale RIP snáze konfigurovatelný než ostatní protokoly. 
+V dnešních sítích se již RIP nepovažuje za dobrou volbu, jelikož čas potřebný ke konvergenci, či rozšiřitelnost, zaostávají za ostatními protokoly jako EIGRP, OSPF, nebo IS-IS. Navíc (bez použití RIP-MTI algoritmu) je kvůli omezenému počtu 
+hopů velmi omezená velikost sítě ve které lze RIP nasadit. Naproti tomu je ale RIP snáze konfigurovatelný než ostatní protokoly. 
 
 Ostatní charakteristiky RIP obsahují
 • RIP podporuje IP and IPX směrování.
@@ -75,7 +70,7 @@ Proč používat RIP?
 jde o šířku pásma, malou spotřebu paměti,
 zatížení procesoru, atd.
 
-
+![snimek obrazovky porizeny 2016-11-23 08-13-32](https://cloud.githubusercontent.com/assets/11191013/20553426/e4cd93b2-b154-11e6-9a84-a03f674c2ba0.png)
 
 Propojíme routery mezi sebou pomoci copper cross-over(rj-45)
 Přiřadíme jim ip adresu: enable
