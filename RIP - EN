@@ -85,7 +85,7 @@ teams of developers.
 terms of bandwidth, memory consumption,
 processor load, etc.
 
-![snimek obrazovky porizeny 2016-11-23 08-13-32](https://cloud.githubusercontent.com/assets/11191013/20553588/fdf10b7a-b155-11e6-932c-1aa20b800093.png)
+https://cloud.githubusercontent.com/assets/11191013/20553588/fdf10b7a-b155-11e6-932c-1aa20b800093.png
 Connect routers with copper cross-over cable, set ip address(enable, conf t, int port, ip address (network) (mask)) then
 connect network with network (network) in conf t
 
