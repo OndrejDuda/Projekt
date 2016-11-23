@@ -85,6 +85,14 @@ teams of developers.
 terms of bandwidth, memory consumption,
 processor load, etc.
 
+![snimek obrazovky porizeny 2016-11-23 08-13-32](https://cloud.githubusercontent.com/assets/11191013/20553426/e4cd93b2-b154-11e6-9a84-a03f674c2ba0.png)
+
+Connect routers with copper cross-over cable, set ip address(enable, conf t, int port, ip address (network) (mask)) then
+connect network with network (network) in conf t
+![snimek obrazovky porizeny 2016-11-16 09-18-40](https://cloud.githubusercontent.com/assets/11191013/20553504/6df647a6-b155-11e6-87d6-959bc61bc9fe.png)
+
+
+
 Resources in cz and en
 http://www.routeralley.com/guides/rip.pdf
 https://en.wikipedia.org/wiki/Routing_Information_Protocol
