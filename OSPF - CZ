@@ -66,7 +66,7 @@ typ 3 - summary, pochází z ABR (Area Border Router), sítě dostupné mimo obl
 typ 4 - ASBR summary, pochází z ABR, pro ASBR
 typ 5 - external AS, oznamuje externí routy (default route), pochází z ASBR, v rámci AS
 typ 6 - multicast info
-typ 7 - ostatní rozšíření - NSSA
+typ 7 - ostatní rozšíření - NSSA 
 
 Typy sítí - network types
 broadcast multi-access (BMA) - sdílené médium, ethernet, volí se DR a BDR automaticky
