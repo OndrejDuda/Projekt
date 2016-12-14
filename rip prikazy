@@ -1,0 +1,99 @@
+Přiřazování adres u RIP: 
+Router RIP 1:
+// přidělení adres pro router rip 1
+Router(config)#int g0/2
+Router(config-if)#ip add 192.168.1.1 255.255.255.224
+Router(config-if)#no sh
+
+Router(config)#int g0/0
+Router(config-if)#ip add 192.168.1.65 255.255.255.248
+Router(config-if)#no sh
+
+Router(config)#int g0/1
+Router(config-if)#ip add 192.168.1.90 255.255.255.248
+Router(config-if)#no sh
+
+Router RIP 2:
+// přidělení adres pro router rip 2
+Router(config)#int g0/0
+Router(config-if)#ip add 192.168.1.66 255.255.255.248
+Router(config-if)#no sh
+
+Router(config)#int g0/1
+Router(config-if)#ip add 192.168.1.73 255.255.255.248
+Router(config-if)#no sh
+
+Router RIP 3:
+// přidělení adres pro router rip 3
+Router(config)#int g0/2
+Router(config-if)#ip add 192.168.1.33 255.255.255.224
+Router(config-if)#no sh
+
+Router(config-if)#int g0/1
+Router(config-if)#ip add 192.168.1.82 255.255.255.248
+Router(config-if)#no sh
+
+Router(config)#int g0/0
+Router(config-if)#ip add 192.168.1.89 255.255.255.248
+Router(config-if)#no sh
+
+Router RIP 4:
+// přidělení adres pro router rip 4
+Router(config)#int g0/1
+Router(config-if)#ip add 192.168.1.74 255.255.255.248
+Router(config-if)#no sh 
+
+Router(config-if)#int g0/0
+Router(config-if)#ip add 192.168.1.81 255.255.255.248
+Router(config-if)#no sh
+
+DHCP u RIP:
+Router RIP 1
+Router(config)#ip dhcp excluded-address 192.168.1.1 192.168.1.5 //vyhrazeni adres
+Router(config)#ip dhcp pool SIT1 //vytvoření dhcp pro přidělení adres PC
+Router(dhcp-config)#network 192.168.1.0 255.255.255.224 // adresy pro PC v síti
+Router(dhcp-config)#default-router 192.168.1.1 // default-gateway
+
+Router RIP 3
+Router(config)#ip dhcp excluded-address 192.168.1.33 192.168.1.38 //vyhrazeni adres
+Router(config)#ip dhcp pool SIT2 //vytvoření dhcp pro přidělení adres PC
+Router(dhcp-config)#network 192.168.1.32 255.255.255.224 // adresy pro PC v síti
+Router(dhcp-config)#default-router 192.168.1.33 // default-gateway
+
+RIP routovaní:
+Router RIP 1:
+
+Router(config)#router rip
+Router(config-router)#version 2
+Router(config-router)#no auto-summary 
+Router(config-router)#network 192.168.1.0
+Router(config-router)#network 192.168.1.64
+Router(config-router)#network 192.168.1.88
+Router#wr
+
+Router RIP 2:
+
+Router(config)#router rip
+Router(config-router)#version 2
+Router(config-router)#no auto-summary 
+Router(config-router)#network 192.168.1.64
+Router(config-router)#network 192.168.1.72
+Router#wr
+
+Router RIP 3:
+
+Router(config)#router rip
+Router(config-router)#version 2
+Router(config-router)#no auto-summary 
+Router(config-router)#network 192.168.1.32
+Router(config-router)#network 192.168.1.80
+Router(config-router)#network 192.168.1.88
+Router#wr
+
+Router RIP 4:
+Router(config)#router rip
+Router(config-router)#version 2
+Router(config-router)#no auto-summary 
+Router(config-router)#network 192.168.1.72
+Router(config-router)#network 192.168.1.80
+Router#wr
