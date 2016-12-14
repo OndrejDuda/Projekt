@@ -65,7 +65,7 @@ Router RIP 1:
 
 Router(config)#router rip
 Router(config-router)#version 2
-Router(config-router)#no auto-summary /classless
+Router(config-router)#no auto-summary /classfull
 Router(config-router)#network 192.168.1.0
 Router(config-router)#network 192.168.1.64
 Router(config-router)#network 192.168.1.88
@@ -75,7 +75,7 @@ Router RIP 2:
 
 Router(config)#router rip
 Router(config-router)#version 2
-Router(config-router)#no auto-summary  /classless
+Router(config-router)#no auto-summary  /classfull
 Router(config-router)#network 192.168.1.64
 Router(config-router)#network 192.168.1.72
 Router#wr
@@ -84,7 +84,7 @@ Router RIP 3:
 
 Router(config)#router rip
 Router(config-router)#version 2
-Router(config-router)#no auto-summary  /classless
+Router(config-router)#no auto-summary  /classfull
 Router(config-router)#network 192.168.1.32
 Router(config-router)#network 192.168.1.80
 Router(config-router)#network 192.168.1.88
@@ -93,7 +93,7 @@ Router#wr
 Router RIP 4:
 Router(config)#router rip
 Router(config-router)#version 2
-Router(config-router)#no auto-summary  /classless
+Router(config-router)#no auto-summary  /classfull
 Router(config-router)#network 192.168.1.72
 Router(config-router)#network 192.168.1.80
 Router#wr
