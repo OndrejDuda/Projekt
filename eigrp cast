@@ -71,13 +71,13 @@ Router(config-if)#int g0/0
 Router(config-if)#ip add 192.168.2.154 255.255.255.248
 Router(config-if)#no sh
 
-/*
-Router(config)#int vlan 2
+Router(config)#int vlan 11
 Router(config-if)#ip add 192.168.2.161 255.255.255.248
-Router(config)#int Fa0/3/0
+Router(config-if)#no sh
+Router(config)#int fa0/3/0
 Router(config-if)#switchport mode access
-Router(config-if)#switchport access vlan 2
-*/
+Router(config-if)#switchport access vlan 11
+
 
 Router EIGRP 2:
 Router(config)#int g0/1
@@ -88,13 +88,13 @@ Router(config-if)#int g0/0
 Router(config-if)#ip add 192.168.2.153 255.255.255.248
 Router(config-if)#no sh
 
-/*
-Router(config)#int vlan 3
-Router(config-if)#ip add 192.168.2.169 255.255.255.248
-Router(config)#int Fa0/3/0
+Router(config)#int vlan 12
+Router(config-if)#ip add 192.168.2.170 255.255.255.248
+Router(config-if)#no sh
+Router(config-if)#
+Router(config-if)#int fa0/3/0
 Router(config-if)#switchport mode access
-Router(config-if)#switchport access vlan 3
-*/
+Router(config-if)#switchport access vlan 12
 
 Router EIGRP 3:
 Router(config)#int g0/1
@@ -105,11 +105,12 @@ Router(config)#int g0/0
 Router(config-if)#ip add 192.168.2.137 255.255.255.248
 Router(config-if)#no sh
 
-/*
-Router(config-if)#int fa0/3/0
-Router(config-if)#switchport mode trunk
-Router(config-if)#switchport trunk allowed vlan 3
-*/
+Router(config)#int vlan 12
+Router(config-if)#ip add 192.168.2.169 255.255.255.248
+Router(config-if)#no sh
+Router(config)#in fa0/3/0
+Router(config-if)#switchport mode access
+Router(config-if)#switchport access vlan 12
 
 Router EIGRP 4:
 Router(config)#int g0/0
@@ -120,8 +121,10 @@ Router(config-if)#int g0/1
 Router(config-if)#ip add 192.168.2.145 255.255.255.248
 Router(config-if)#no sh
 
-/*
-Router(config)#int fa0/3/0
-Router(config-if)#switchport mode trunk
-*/
-Router(config-if)#switchport trunk allowed vlan 2
+Router(config)#int vlan 11
+Router(config-if)#ip add 192.168.2.162 255.255.255.248
+Router(config-if)#no sh
+Router(config-if)#int fa0/3/0
+Router(config-if)#switchport mode access
+Router(config-if)#switchport access vlan 11
+
