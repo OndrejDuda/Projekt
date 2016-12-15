@@ -1,0 +1,127 @@
+Nastavení vlanu k pc + dhcp:
+
+Router EIGRP 1:
+
+Router(config)#int g0/2
+Router(config-if)#no sh
+
+Router(config-if)#int g0/2.15                                     // vytvoření sub int
+Router(config-subif)#encapsulation dot1Q 15                       //specifikuje identifikátor pro VLAN 15
+Router(config-subif)#ip add 192.168.2.1 255.255.255.192
+
+Router(config)#ip dhcp excluded-address 192.168.2.0 192.168.2.10 // vyřazení adres z dhcp
+Router(config)#ip dhcp pool SIT3                                 //vytvoení dhcp SIT3
+Router(dhcp-config)#network 192.168.2.0 255.255.255.192
+Router(dhcp-config)#default-router 192.168.2.1
+
+Router EIGRP 2:
+
+Router(config)#int g0/2
+Router(config-if)#no sh
+
+Router(config-if)#int g0/2.25 // vytvoření sub int
+Router(config-subif)#encapsulation dot1Q 25                       //specifikuje identifikátor pro VLAN 25
+Router(config-subif)#ip add 192.168.2.66 255.255.255.192
+
+Router(config)#ip dhcp excluded-address 192.168.2.65 192.168.2.74 // vyřazení adres z dhcp
+Router(config)#ip dhcp pool SIT4                                  //vytvoení dhcp SIT4
+Router(dhcp-config)#network 192.168.2.64 255.255.255.192
+Router(dhcp-config)#default-router 192.168.2.66
+
+S3:
+Switch(config)#int g0/1
+Switch(config-if)#switchport mode trunk                           // zapnutí modu trunk
+Switch(config-if)#no sh
+
+Switch(config)#int vlan 15
+Switch(config-if)#ip add 192.168.2.2 255.255.255.192
+
+Switch(config)#int range Fa0/1-3
+Switch(config-if-range)#switchport mode access
+Switch(config-if-range)#switchport access vlan 15                 // povolení vlanu pro int
+
+Switch(config-if)#int Fa0/4
+Switch(config-if)#switchport mode trunk                           // zapnutí modu trunk
+
+S4:
+
+Switch(config)#int g0/1
+Switch(config-if)#switchport mode trunk
+Switch(config-if)#no sh
+
+Switch(config)#int vlan 25
+Switch(config-if)#ip add 192.168.2.65 255.255.255.192
+
+Switch(config-if-range)#int range Fa0/1-3
+Switch(config-if-range)#switchport mode access                  
+Switch(config-if-range)#switchport access vlan 25               // povolení vlanu pro int
+
+Switch(config-if)#int Fa0/4
+Switch(config-if)#switchport mode trunk                         // zapnutí modu trunk
+
+----------------------------------------------------------------------------------------------------------------------------------------
+Přidělení adres mezi routery:
+
+Router EIGRP 1:
+Router(config)#int g0/1
+Router(config-if)#ip add 192.168.2.129 255.255.255.248
+Router(config-if)#no sh
+
+Router(config-if)#int g0/0  
+Router(config-if)#ip add 192.168.2.154 255.255.255.248
+Router(config-if)#no sh
+
+/*
+Router(config)#int vlan 2
+Router(config-if)#ip add 192.168.2.161 255.255.255.248
+Router(config)#int Fa0/3/0
+Router(config-if)#switchport mode access
+Router(config-if)#switchport access vlan 2
+*/
+
+Router EIGRP 2:
+Router(config)#int g0/1
+Router(config-if)#ip add 192.168.2.146 255.255.255.248
+Router(config-if)#no sh
+
+Router(config-if)#int g0/0
+Router(config-if)#ip add 192.168.2.153 255.255.255.248
+Router(config-if)#no sh
+
+/*
+Router(config)#int vlan 3
+Router(config-if)#ip add 192.168.2.169 255.255.255.248
+Router(config)#int Fa0/3/0
+Router(config-if)#switchport mode access
+Router(config-if)#switchport access vlan 3
+*/
+
+Router EIGRP 3:
+Router(config)#int g0/1
+Router(config-if)#ip add 192.168.2.130 255.255.255.248
+Router(config-if)#no sh
+
+Router(config)#int g0/0
+Router(config-if)#ip add 192.168.2.137 255.255.255.248
+Router(config-if)#no sh
+
+/*
+Router(config-if)#int fa0/3/0
+Router(config-if)#switchport mode trunk
+Router(config-if)#switchport trunk allowed vlan 3
+*/
+
+Router EIGRP 4:
+Router(config)#int g0/0
+Router(config-if)#ip add 192.168.2.138 255.255.255.248
+Router(config-if)#no sh
+
+Router(config-if)#int g0/1
+Router(config-if)#ip add 192.168.2.145 255.255.255.248
+Router(config-if)#no sh
+
+/*
+Router(config)#int fa0/3/0
+Router(config-if)#switchport mode trunk
+*/
+Router(config-if)#switchport trunk allowed vlan 2
