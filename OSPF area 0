@@ -1,0 +1,56 @@
+Přidělování adres:
+
+L3 Switch 1:
+Switch(config)#ip routing
+Switch(config)#int Fa0/1
+Switch(config-if)#no switchport
+Switch(config-if)#ip add 192.168.0.1 255.255.255.192
+Switch(config-if)#no sh
+
+Switch(config)#int Fa0/2
+Switch(config-if)#no switchport
+Switch(config-if)#ip add 192.168.0.130 255.255.255.192
+Switch(config-if)#no sh
+
+L3 Switch 2:
+Switch(config)#ip routing
+Switch(config)#int Fa0/1
+Switch(config-if)#no switchport
+Switch(config-if)#ip add 192.168.0.2 255.255.255.192
+Switch(config-if)#no sh
+
+Switch(config)#int Fa0/2
+Switch(config-if)#no switchport 
+Switch(config-if)#ip add 192.168.0.65 255.255.255.192
+Switch(config-if)#no sh
+
+L3 Switch 3:
+Switch(config)#ip routing
+Switch(config)#int Fa0/1
+Switch(config-if)#no switchport
+Switch(config-if)#ip add 192.168.0.66 255.255.255.192
+Switch(config-if)#no sh
+
+Switch(config)#int fa0/2
+Switch(config-if)#no switchport
+Switch(config-if)#ip add 192.168.0.129 255.255.255.192
+Switch(config-if)#no sh
+
+----------------------------------------------------------------------------------------------------------------------------------------
+
+OSPF routing:
+
+L3 Switch 1:
+Switch(config)#router ospf 1
+Switch(config-router)#network 192.168.0.0 0.0.0.63 area 0
+Switch(config-router)#network 192.168.0.128 0.0.0.63 area 0
+
+L3 Switch 2:
+Switch(config)#router ospf 1
+Switch(config-router)#network 192.168.0.0 0.0.0.63 area 0
+Switch(config-router)#network 192.168.0.64 0.0.0.63 area 0
+
+L3 Switch 3:
+Switch(config)#router ospf 1
+Switch(config-router)#network 192.168.0.64 0.0.0.63 area 0
+Switch(config-router)#network 192.168.0.128 0.0.0.63 area 0
