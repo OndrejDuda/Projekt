@@ -182,22 +182,22 @@ Router(config-router)#network 192.168.2.136 0.0.0.7
 EIGRP weight:
 Router EIGRP 1:
 Router(config)#router eigrp 20
-Router(config-router)#metric weights 0 1 0 2 0 0 0 
+Router(config-router)#metric weights 0 1 0 2 0 0 0 // 2*latencny u eigrp 20
 
 Router EIGRP 2:
 Router(config)#router eigrp 30
-Router(config-router)#metric weights 0 1 0 2 0 0 
+Router(config-router)#metric weights 0 1 0 2 0 0 // 2*latencny u eigrp 30
 
 Router EIGRP 3:
 Router(config)#router eigrp 20
-Router(config-router)#metric weights 0 1 0 2 0 0 0 
+Router(config-router)#metric weights 0 1 0 2 0 0 0 // 2*latencny u eigrp 20
 
 Router(config)#router eigrp 30
-Router(config-router)#metric weights 0 1 0 2 0 0 
+Router(config-router)#metric weights 0 1 0 2 0 0 // 2*latencny u eigrp 30
 
 Router EIGRP 4:
 Router(config)#router eigrp 20
-Router(config-router)#metric weights 0 1 0 2 0 0 0 
+Router(config-router)#metric weights 0 1 0 2 0 0 0 // 2*latencny u eigrp 20
 
 Router(config)#router eigrp 30
-Router(config-router)#metric weights 0 1 0 2 0 0 
+Router(config-router)#metric weights 0 1 0 2 0 0 // 2*latencny u eigrp 30
