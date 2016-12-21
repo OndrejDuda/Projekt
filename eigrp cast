@@ -140,7 +140,7 @@ Router(config)#router eigrp 20
 Router(config-router)#network 192.168.2.160 0.0.0.7
 Router(config-router)#network 192.168.2.0 0.0.0.63
 
-Router(config)#router eigrp 5
+Router(config)#router eigrp 5 // jen na github
 Router(config-router)#network 192.168.2.152 0.0.0.7
 
 Router EIGRP 2:
@@ -152,7 +152,7 @@ Router(config)#router eigrp 30
 Router(config-router)#network 192.168.2.168 0.0.0.7
 Router(config-router)#network 192.168.2.64 0.0.0.63
 
-Router(config)#router eigrp 5
+Router(config)#router eigrp 5 // jen na github
 Router(config-router)#network 192.168.2.152 0.0.0.7
 
 Router EIGRP 3:
