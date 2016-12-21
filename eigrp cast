@@ -128,3 +128,76 @@ Router(config-if)#int fa0/3/0
 Router(config-if)#switchport mode access
 Router(config-if)#switchport access vlan 11
 
+----------------------------------------------------------------------------------------------------------------------------------------
+
+EIGRP routing:
+Router EIGRP 1:
+Router(config)#router eigrp 100 // nastavení maximálního počtu hopů
+Router(config-router)#network 192.168.2.128 0.0.0.7
+Router(config-router)#network 192.168.2.0 0.0.0.63
+
+Router(config)#router eigrp 20
+Router(config-router)#network 192.168.2.160 0.0.0.7
+Router(config-router)#network 192.168.2.0 0.0.0.63
+Router(config-router)#metric weights 0 1 0 2 0 0 0 
+
+Router EIGRP 2:
+Router(config)#router eigrp 110 // nastavení maximálního počtu hopů
+Router(config-router)#network 192.168.2.144 0.0.0.7
+Router(config-router)#network 192.168.2.64 0.0.0.63
+
+Router(config)#router eigrp 30
+Router(config-router)#network 192.168.2.168 0.0.0.7
+Router(config-router)#network 192.168.2.64 0.0.0.63
+Router(config-router)#metric weights 0 1 0 2 0 0 
+
+Router EIGRP 3:
+Router(config)#router eigrp 100 // nastavení maximálního počtu hopů
+Router(config-router)#network 192.168.2.128 0.0.0.7
+
+Router(config)#router eigrp 20
+Router(config-router)#network 192.168.2.136 0.0.0.7
+Router(config-router)#metric weights 0 1 0 2 0 0 0 
+
+Router(config)#router eigrp 30
+Router(config-router)#network 192.168.2.136 0.0.0.7
+Router(config-router)#network 192.168.2.168 0.0.0.7
+Router(config-router)#metric weights 0 1 0 2 0 0 
+
+Router EIGRP 4:
+Router(config)#router eigrp 110 // nastavení maximálního počtu hopů
+Router(config-router)#network 192.168.2.144 0.0.0.7
+
+Router(config)#router eigrp 20
+Router(config-router)#network 192.168.2.136 0.0.0.7
+Router(config-router)#network 192.168.2.160 0.0.0.7
+Router(config-router)#metric weights 0 1 0 2 0 0 0 
+
+Router(config)#router eigrp 30
+Router(config-router)#network 192.168.2.136 0.0.0.7
+Router(config-router)#metric weights 0 1 0 2 0 0 
+
+----------------------------------------------------------------------------------------------------------------------------------------
+
+EIGRP weight:
+Router EIGRP 1:
+Router(config)#router eigrp 20
+Router(config-router)#metric weights 0 1 0 2 0 0 0 
+
+Router EIGRP 2:
+Router(config)#router eigrp 30
+Router(config-router)#metric weights 0 1 0 2 0 0 
+
+Router EIGRP 3:
+Router(config)#router eigrp 20
+Router(config-router)#metric weights 0 1 0 2 0 0 0 
+
+Router(config)#router eigrp 30
+Router(config-router)#metric weights 0 1 0 2 0 0 
+
+Router EIGRP 4:
+Router(config)#router eigrp 20
+Router(config-router)#metric weights 0 1 0 2 0 0 0 
+
+Router(config)#router eigrp 30
+Router(config-router)#metric weights 0 1 0 2 0 0 
