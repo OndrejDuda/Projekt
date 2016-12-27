@@ -1,33 +1,23 @@
-OSPF 
+OSPF (Open Shortest Path First)
 
 Vlastnosti OSPF
-Otevřený standard, asi nejrozšířenější IGP protokol ve větších firmách, jedná se o classless protokol / podporuje VLSM, 
-používá Dijkstrův algoritmus nejkratší cesty - SPF, spolupracuje s MPLS (Multi Protocol Label Switching) - udržuje routovací 
-tabulky velké OSPF sítě je vhodné rozdělovat do oblastí (areas) - sníží se výpočet SPF, menší routovací tabulky, snížení 
-LSU (link-state update), díky oblastem podporuje hierarchický síťový design, používá link-state databázi, která předchází 
-smyčkám pro snižování routovacích tabulek se může použít manuální sumarizace, ale automatická není podporována
-routovací updaty se posílají, pouze pokud jsou potřeba využívá multicast (takže neovlivňuje stanice a ostatní zařízení bez 
-OSPF), 224.0.0.6 - všechny DR (Designated Router)  a BDR (Backup Designated Router), 224.0.0.5 - všechny routery,
-224.0.0.2 - všechny routery na stejném subnetu. Nepoužívá TCP, ale IP protokol 89, sám si řeší detekci a opravu chyb, 
-podporuje autentizaci, plain text nebo MD5, pro akceptování LSA (link-state advertisement),
-používá hello protokol - lepší než výměna tabulek v RIP, pomocí něj navazuje sousedství, posílá každých 10s,
-aby se routery staly sousedy, hello paket musí mít shodné hodnoty - číslo oblasti, typ oblasti (stub nebo NSSA flag), 
-subnet a subnet mask, hello a dead timer, autentizační údaje.
-LSA se odesílá každých 30min nebo při změně, šíří se pomocí flooding (zaplavování), cena linky pro OSPF 
-cost = 100Mb / bandwidth. OSPF router ID (nastavuje se při restartu) je nejvyšší IP adresa (aktivní) na routeru nebo adresa 
-loopback interfacu (to je doporučeno, protože je stále up). 
-DR/BDR volba je podle nastavené priority nebo podle Router ID, probíhá pouze v multi-access sítích, ne v point-to-point, 
-když DR selže, tak BDR se stane DR a zvolí se nový BDR,  pokud původní DR naběhne, tak se nestane automaticky 
-DR (pouze až selže DR i BDR), pokud nějaká oblast nemůže být přímo připojena do backbone, může být připojena do jiné 
-oblasti, která je přímo do oblasti 0, a musí se vytvořit virtuální link (logická cesta do backbone skrze tranzitní oblast) -
-- je identifikována pomocí router id sousedního routeru (pokud se zadá špatně, tak se nevytvoří) hranice oblastí jsou 
-definovány uvnitř routeru na routeru může běžet až 30 OSPF routing proces.
+OSPF je nejrozšířenější standard, obvykle ve větších IGP firmách.
+Je to classless protokol, který podporuje VLSM a používá Dijkstrův algoritmus pro výpočet nejkratší cesty, který spolupracuje s MPLS
+(Multi Protocol Label Switching), který udržuje routovací tabulku.
+Velké OSPF sítě je vhodné rozdělovat do oblastí (areas), čímž se sníží výpočet SPF, změnší routovací tabulky, sníží množství LSU
+(link-state update), podporuje hierarchický síťový design.
+Používá IP protokol 89, který si sám řeší detekci a opravu chyb, navíc podporuje autentizaci pro akceptování LSA 
+(link-state advertisment), používá hello protokol, kde je lepší výměna tabulek než-li v RIP síti, navazuje na sousedství, posílá
+hello pakety každých 10 sekund, aby se routery staly sousedy, ale také musí mít shodné hodnoty, čísla oblastí, subnet, masku a 
+autentizační údaje.
 
 Tabulky pro OSPF
-routovací (routing) - nejlepší routy do destinací
-topologie (topology) - routovací záznamy do všech destinací
+routovací (routing) - nejlepší cesty k cíli
+topologie (topology) - záznamy cest do všech zařízení
 sousedů (adjacency) - informace o sousedních routerech
-link-state database - stejná pro všechny routery, synchronizace pomocí zaplavení LSA, pomocí ní se vytvoří routovací tabulky, obraz síťové topologie ve stromové struktuře
+link-state database - stejná pro všechny routery, synchronizace pomocí zaplavení LSA, pomocí ní se vytvoří routovací tabulky, obraz 
+síťové topologie ve stromové struktuře
+
 OSPF routes (typy záznamů)
 O - OSPF síť ve stejné oblasti (intra-area)
 O IA - OSPF inter-area, z ABR (LSA 3 a 4)
