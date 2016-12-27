@@ -20,16 +20,8 @@ pro zajišťování stability kvůli potencionálně rychlým změnám v síťov
 a zdržující mechanismus udrží siť dole, dokud nebude úprava provedena, aby se nemnožily nesprávné směrovací informace. 
 
 Popis
-RIP je směrovací protokol typu distance-vector (vektor vzdálenosti) využívající Bellmanův-Fordův algoritmus pro určení 
-nejkratší cesty v síti. Metrikou směrování je počet skoků k cílové síti (počet skoků). Jako ochrana proti směrovacím smyčkám 
-je implementovaný omezený počet směrovačů (hopů) v cestě k cíli, maximální možný počet hopů je 15. Tento limit ovšem také 
-omezuje velikost sítí ve kterých lze RIP použít (16 hopů je bráno jako nekonečná vzdálenost a používá se k označení 
-nepřístupných, nepoužitelných směrovacích tras).
-Původně každý router s RIP vysílal aktualizované směrovací tabulky v intervalu 30 sekund. To z počátku nepředstavovalo žádný 
-problém, jelikož směrovací tabulky nebyly tak rozsáhlé, aby se to nějak výrazněji projevilo na síťovém provozu. Vzhledem k 
-růstu sítí (a tudíž i směrovacích tabulek) se ale toto řešení ukázalo jako nevhodné, jelikož každých 30 sekund by byla síť 
-zahlcena velkým množstvím dat. Moderní implementace RIP toto řeší pomocí různých metod nastavujících časové intervaly každého 
-routeru zvlášť, aby byla data rozprostřena v čase, a nedocházelo nárazově k velkým tokům dat.
+RIP je směrovací protokol, který vypočítává vzdálenost pomocí algoritmu distance-vector (vektor vzdálenosti), jenž používá Bellmanův-Fordův algoritmus pro určení nejkratší cesty k cíli. Počítá se s počtem skoků, čím více, tím se předpokládá, že to bude i déle trvat. Jako ochrana proti směrovacím smyčkám je implementovaný omezený počet směrovačů (hopů) v cestě k cíli, maximální možný počet hopů je 15. Tento limit ovšem také omezuje velikost sítí ve kterých lze RIP použít (16 hopů je bráno jako nekonečná vzdálenost a používá se k označení nepřístupných, nepoužitelných směrovacích tras).
+Kdysi byly aktualizace každých 30 sekund. To z počátku nepředstavovalo problém, jelikož směrovací tabulky nebyly rozsáhlé, aby se to nějak projevilo na síťovém provozu. Vzhledem k růstu sítí (a tudíž i směrovacích tabulek) se ale toto řešení ukázalo jako nevhodné, jelikož každých 30 sekund by byla síť zahlcena velkým množstvím dat. Moderní implementace RIP toto řeší pomocí různých metod nastavujících časové intervaly každého routeru zvlášť, aby byla data rozprostřena v čase, a nedocházelo nárazově k velkým tokům dat.
 V dnešních sítích se již RIP nepovažuje za dobrou volbu, jelikož čas potřebný ke konvergenci, či rozšiřitelnost, zaostávají za ostatními protokoly jako EIGRP, OSPF, nebo IS-IS. Navíc (bez použití RIP-MTI algoritmu) je kvůli omezenému počtu 
 hopů velmi omezená velikost sítě ve které lze RIP nasadit. Naproti tomu je ale RIP snáze konfigurovatelný než ostatní protokoly. 
 
