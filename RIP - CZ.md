@@ -50,14 +50,18 @@ RIP má 2 verze, verze první (RIPv1) a verzi druhou (RIPv2).
 
 RIPv1 (RFC 1058) je plno třídová a neobsahuje masku podsítě s aktualizacemi 
 routovacích tabulek. Kvůli tomu, RIPv1 nepodporuje proměnnou vzdálenost 
-masku podsítě (VLSMs). Když používáme RIPv1, sítě musí být sousedící a 
+masku podsítě (VLSMs). 
+
+Když používáme RIPv1, sítě musí být sousedící a 
 podsítě hlavní sitě musí být nastaveny se stejnou maskou jakou je maska 
 podsítě. Jinak se objeví nesrovnalosti v routovací tabulce nebo hůř.
 
 RIPv1 posílá aktualiza na broadcast - 255.255.255.255.
 
 RIPv2 (RFC 2543) je bez třídová a to zahrnuje masku podsítě s jejími 
-aktualizacemi směrovací tabulky. RIPv2 plně podporuje VLKSMs, umožňuje 
+aktualizacemi směrovací tabulky. 
+
+RIPv2 plně podporuje VLKSMs, umožňuje 
 nesouvislé sítě a měnící se masky podsítí.
 
 Další zlepšení nabízené v RIPv2 zahrnují:
@@ -74,28 +78,15 @@ Proč používat RIP?
 jde o šířku pásma, malou spotřebu paměti,
 zatížení procesoru, atd.
 
-![snimek obrazovky porizeny 2016-11-23 08-13-32](https://cloud.githubusercontent.com/assets/11191013/20553426/e4cd93b2-b154-11e6-9a84-a03f674c2ba0.png)
-
-Propojíme routery mezi sebou pomoci copper cross-over(rj-45)
-Přiřadíme jim ip adresu: 
-
-                         enable....
-
-                         conf t....
-                         
-                         int (port)....
-                         
-                         ip address (adresa) (maska)....
-                         
-                         no sh....
-                         
-Propojíme síť:
-
+Propojíme síť (RIP):
+               
+               enable.....
+               
                conf t.....
 
                router rip.....
                
-               version 2
+               version 2.....
                
                network (okolní sítě obsahující rip)......
                
