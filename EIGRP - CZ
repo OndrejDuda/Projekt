@@ -1,11 +1,13 @@
 EIGRP - Enhanced Interior Gateway Routing Protocol
 
 Historie EIGRP:
+
 Než EIGRP vznikl byl IGRP, Interior Gatway Routing Protocol. Cisco vytvoříl IGRP v 80. letech jako odpověď 
 na limitaci RIP, má daleko více možných skoků než RIP. Protokol EIGRP vznikl roku 1993 a jedním z hlavních důvodů jeho vytvoření byl
 přechod na beztřídní adresy, které IGRP nepodporoval. Od roku 2013 se stal volně dostupným standardem.
 
 Základní informace:
+
 EIGRP protokol byl vytvořen společností CISCO a je proprietárním protokolem. 
 Byl vytvořen jako rozšíření staršího IGRP.
 Používá DUAL algoritmus - Diffusing Update based algoritmus. 
@@ -18,10 +20,12 @@ rychlých linkách a 60s na pomalých linkách.
 Podporuje IP, IPv6, IPX, AppleTalk maximálně zabere (v základním nastavení) 50% propustnosti interfacu.
 
 Výpočet hodnoty pro FS:
+
 delay metric = ([(K1 * bandwidth) + [(K2 * bandwidth) ÷ (256 - load)] + (K3 * delay)] * [K5 ÷ (reliability + K4)]) * 256 = 
 = cca = (bandwith + delay) * 256
 
 Základní termíny EIGRP:
+
 Succesor - Je primární cesta k cíli, která se ukládá routovací tabulky, může být více těchto cest ke stejnému cíli 
 Feasible Successor - záložní cesta (backup route), která se ukládá tabulky topologie, může jich být více ke 
 stejnému cíli, její RD je menší než FD současné nejlepší cesty 
@@ -34,6 +38,7 @@ FD pro určitý cíl, tak leží na cestě bez smyček.
 
 
 Pakety posílané v EIGRP:
+
 Hello - multicast, zasílání nespolehlivě (nevyžaduje potvrzování), objevování sousedů (discover), identifikace nefunkčních routerů, 
 posílá (interval) se každých 5s na rychlých linkách nebo každých 60s, hold time pro hello paket je 3 x hello interval
 Acknowledgement - unicast, nespolehlivě, hello bez dat s číslem potvrzení
@@ -42,11 +47,13 @@ Reply - unicast, doručování spolehlivě, odpověď na query
 Update - multicast, doručování spolehlivě (reliably), zprostředkovává dostupnost, soused si pomocí nich sestaví topology table
 
 Tabulky pro EIGRP:
+
 routovací (routing) - nejlepší routy do destinací
 topologie (topology) - routovací záznamy do všech destinací
 sousedé (neighbors) - informace o sousedních routerech (adjacent)
 
 EIGRP se používá:
+
 Používá se pro topologii Hub and Spoke (model kola - střed kola a paprsky, obdoba topologie hvězda)
 jako stub se konfigurují pouze vzdálené routery (spoke) jako sousedi stub routeru by měli být pouze EIGRP hub 
 routery (distribution) snižuje využití zdrojů, zvyšuje síťovou stabilitu a zjednodušuje konfiguraci stub routeru
