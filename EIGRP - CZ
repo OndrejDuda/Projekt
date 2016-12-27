@@ -21,8 +21,7 @@ Podporuje IP, IPv6, IPX, AppleTalk maximálně zabere (v základním nastavení)
 
 Výpočet hodnoty pro FS:
 
-delay metric = ([(K1 * bandwidth) + [(K2 * bandwidth) ÷ (256 - load)] + (K3 * delay)] * [K5 ÷ (reliability + K4)]) * 256 = 
-= cca = (bandwith + delay) * 256
+delay metric = ([(K1 * bandwidth) + [(K2 * bandwidth) ÷ (256 - load)] + (K3 * delay)] * [K5 ÷ (reliability + K4)]) * 256
 
 Základní termíny EIGRP:
 
