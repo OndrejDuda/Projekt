@@ -28,13 +28,15 @@ Kdysi byly aktualizace každých 30 sekund. To z počátku nepředstavovalo prob
 V dnešních sítích se již RIP nepovažuje za dobrou volbu, jelikož čas potřebný ke konvergenci, či rozšiřitelnost, zaostávají za ostatními protokoly jako EIGRP, OSPF, nebo IS-IS. Navíc (bez použití RIP-MTI algoritmu) je kvůli omezenému počtu 
 hopů velmi omezená velikost sítě ve které lze RIP nasadit. Naproti tomu je ale RIP snáze konfigurovatelný než ostatní protokoly. 
 
-Ostatní charakteristiky RIP obsahují
+Ostatní charakteristiky RIP obsahují:
+
 • RIP podporuje IP and IPX směrování.
 • RIP využívá UDP port 520
 • RIP cesty mají administrativní vzdálenost 120.
 • RIP maximální počet skoků je 15.
 
-Menší výcuc
+Menší výcuc:
+
 RIP řídí následujícími charakteristikami vzdálenostních vektorů:
 • RIP rozesílá routerům aktualizace každých 30 sekund
 • RIP rozesílá celkou směrovací tabulku každých 30 sekund
@@ -42,7 +44,8 @@ RIP řídí následujícími charakteristikami vzdálenostních vektorů:
 • RIP používá Bellmanův-Fordův algoritmus pro určení 
 nejkratší cesty v síti
 
-RIP verze
+RIP verze:
+
 RIP má 2 verze, verze první (RIPv1) a verzi druhou (RIPv2).
 
 RIPv1 (RFC 1058) je plno třídová a neobsahuje masku podsítě s aktualizacemi 
@@ -58,10 +61,12 @@ aktualizacemi směrovací tabulky. RIPv2 plně podporuje VLKSMs, umožňuje
 nesouvislé sítě a měnící se masky podsítí.
 
 Další zlepšení nabízené v RIPv2 zahrnují:
+
 • Směrovací aktualizace jsou posílány na multicast, používá adresu 224.0.0.9
 • Šifrované autentizace můžou být nakonfigurovány na RIPv2 směrovačích (routerech)
 
 Proč používat RIP?
+
 • RIP je jednoduchý na realizaci →
 – Mnoho ruzných implementací.
 – Protokol byl testovaný mnoha týmy vývojářů.
