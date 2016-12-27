@@ -66,8 +66,8 @@ Nestejná hodnota sdílení zátěže.
 Aktualizační doba třikrát kratší než u RIP.
 Více efektivní aktualizační formát paketů.
 
-http://www.samuraj-cz.com/clanek/cisco-routing-2-eigrp-enhanced-interior-gateway-routing-protocol/ cz
-http://ericleahy.com/index.php/eigrp-part-one/ en
-http://docwiki.cisco.com/wiki/Enhanced_Interior_Gateway_Routing_Protocol en
+http://www.samuraj-cz.com/clanek/cisco-routing-2-eigrp-enhanced-interior-gateway-routing-protocol/ CZ
+http://ericleahy.com/index.php/eigrp-part-one/ EN
+http://docwiki.cisco.com/wiki/Enhanced_Interior_Gateway_Routing_Protocol EN
 
 
