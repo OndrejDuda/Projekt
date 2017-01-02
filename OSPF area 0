@@ -4,36 +4,36 @@ L3 Switch 1:
 Switch(config)#ip routing
 Switch(config)#int Fa0/1
 Switch(config-if)#no switchport
-Switch(config-if)#ip add 192.168.0.1 255.255.255.192
+Switch(config-if)#ip add 192.168.0.1 255.255.255.224 
 Switch(config-if)#no sh
 
 Switch(config)#int Fa0/2
 Switch(config-if)#no switchport
-Switch(config-if)#ip add 192.168.0.130 255.255.255.192
+Switch(config-if)#ip add 192.168.0.33 255.255.255.224
 Switch(config-if)#no sh
 
 L3 Switch 2:
 Switch(config)#ip routing
 Switch(config)#int Fa0/1
 Switch(config-if)#no switchport
-Switch(config-if)#ip add 192.168.0.2 255.255.255.192
+Switch(config-if)#ip add 192.168.0.2 255.255.255.224
 Switch(config-if)#no sh
 
-Switch(config)#int Fa0/2
-Switch(config-if)#no switchport 
-Switch(config-if)#ip add 192.168.0.65 255.255.255.192
+Switch(config-if)#int Fa0/2
+Switch(config-if)#no switchport
+Switch(config-if)#ip add 192.168.0.65 255.255.255.224
 Switch(config-if)#no sh
 
 L3 Switch 3:
 Switch(config)#ip routing
 Switch(config)#int Fa0/1
 Switch(config-if)#no switchport
-Switch(config-if)#ip add 192.168.0.66 255.255.255.192
+Switch(config-if)#ip add 192.168.0.66 255.255.255.224
 Switch(config-if)#no sh
 
-Switch(config)#int fa0/2
+Switch(config-if)#int Fa0/2
 Switch(config-if)#no switchport
-Switch(config-if)#ip add 192.168.0.129 255.255.255.192
+Switch(config-if)#ip add 192.168.0.34 255.255.255.224
 Switch(config-if)#no sh
 
 ----------------------------------------------------------------------------------------------------------------------------------------
