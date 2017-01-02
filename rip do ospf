@@ -3,22 +3,22 @@ RIP do OSPF:
 Router L3-2:
 en
 conf t
-int Fa0/3 192.168.0.193 255.255.255.248
+int Fa0/3 192.168.0.96 255.255.255.248
 router ospf 1                           // zapnout protokol OSPF
-network 192.168.0.192 0.0.0.7 area 0    // určení sítě
+network 192.168.0.96 0.0.0.7 area 0    // určení sítě
 
 Router RIP 4:
 en
 conf t
-int g0/2 192.168.0.194 255.255.255.248
+int g0/2 192.168.0.96 255.255.255.248
 
 router ospf 1                           // zapnout protokol ospf
 redistribute rip metric 5000 subnets    // prostor pro RIP
-network 192.168.0.192 0.0.0.7 area 0    // ospf síť do backbone
+network 192.168.0.96 0.0.0.7 area 0     // ospf síť do backbone
 exit
 
 router rip                              // protokol RIP
 version 2                               // RIPv2
 redistribute ospf 1 metric 5            // rip do ospf
-network 192.168.0.192                   // síť
+network 192.168.0.96                    // síť
 no auto-summary                         // classful
