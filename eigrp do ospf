@@ -1,0 +1,35 @@
+Přidělení adres:
+
+Router EIGRP 3:
+
+Router>en
+Router#conf t
+Router(config)#int g0/2
+Router(config-if)#
+Router(config-if)#ip add 192.168.0.201 255.255.255.248
+Router(config-if)#no sh
+
+Router>en
+Router#conf t
+Router(config)#int g0/2
+Router(config-if)#
+Router(config-if)#ip add 192.168.0.209 255.255.255.248
+Router(config-if)#no sh
+
+L3-1:
+
+Switch>en
+Switch#conf t
+Switch(config)#int Fa0/3
+Switch(config-if)#no switchport
+Switch(config-if)#ip add 192.168.0.202 255.255.255.248
+Switch(config-if)#no sh
+
+Switch>en
+Switch#conf t
+Switch(config)#int Fa0/4
+Switch(config-if)#no switchport
+Switch(config-if)#ip add 192.168.0.210 255.255.255.248
+Switch(config-if)#no sh
+
+-------------------------------------------------------------------------------------------------------------------------------------------
