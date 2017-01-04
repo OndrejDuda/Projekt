@@ -132,9 +132,10 @@ Router(config-if)#switchport access vlan 11
 
 EIGRP routing:
 Router EIGRP 1:
-Router(config)#router eigrp 100 // nastavení maximálního počtu hopů
+Router(config)#router eigrp 50  // nastavení maximálního počtu hopů
 Router(config-router)#network 192.168.2.128 0.0.0.7
 Router(config-router)#network 192.168.2.0 0.0.0.63
+Router(config-router)#no au
 
 Router(config)#router eigrp 20
 Router(config-router)#network 192.168.2.160 0.0.0.7
@@ -156,8 +157,9 @@ Router(config)#router eigrp 5 // jen na github
 Router(config-router)#network 192.168.2.152 0.0.0.7
 
 Router EIGRP 3:
-Router(config)#router eigrp 100 // nastavení maximálního počtu hopů
+Router(config)#router eigrp 50 // nastavení maximálního počtu hopů
 Router(config-router)#network 192.168.2.128 0.0.0.7
+Router(config-router)#no au
 
 Router(config)#router eigrp 20
 Router(config-router)#network 192.168.2.136 0.0.0.7
