@@ -5,17 +5,27 @@ Router(config)#int g0/2
 Router(config-if)#ip add 192.168.0.106 255.255.255.248
 Router(config-if)#no sh
 
+EIGRP router 4:
+Router(config)#int g0/2
+Router(config-if)#ip add 192.168.0.114 255.255.255.248
+Router(config-if)#no sh
+
 L1:
 Switch(config)#int fa0/3
 Switch(config-if)#no switchport
 Switch(config-if)#ip add 192.168.0.105 255.255.255.248
 Switch(config-if)#no sh
 
--------------------------------------------------------------------------------------------------------------------------------------------
+Switch(config)#int Fa0/4
+Switch(config-if)#no switchport
+Switch(config-if)#ip add 192.168.0.113 255.255.255.248
+Switch(config-if)#no sh
+
+----------------------------------------------------------------------------------------------------------------------------------------
 Router EIGRP 3:
 
 Router(config)#router ospf 1
-Router(config-router)#network 192.168.2.128 0.0.0.7 area 0
+Router(config-router)#network 192.168.2.128 0.0.0.7 area 2
 Router(config-router)#network 192.168.0.104 0.0.0.7 area 0
 Router(config-router)#exit
 
@@ -34,4 +44,69 @@ Router(config)#router ospf 1
 Router(config-router)#network 192.168.0.104 0.0.0.7 area 0
 Router(config-router)#exit
 
-  
+----------------------------------------------------------------------------------------------------------------------------------------
+
+EIGRP router 4:
+
+Router(config)#router eigrp 60
+Router(config-router)#network 192.168.0.112 0.0.0.7
+Router(config-router)#network 192.168.2.144 0.0.0.7
+Router(config-router)#no auto-summary 
+
+Router(config)#router ospf 1
+Router(config-router)#network 192.168.0.112 0.0.0.7 area 0
+Router(config-router)#network 192.168.2.144 0.0.0.7 area 2
+Router(config-router)#exit
+
+Router(config)#router ospf 1
+Router(config-router)#redistribute eigrp 60 metric 60 subnets 
+
+Router(config)#router eigrp 60
+Router(config-router)#redistribute ospf 1 metric 1500 1000 255 60 1500
+
+----------------------------------------------------------------------------------------------------------------------------------------
+
+EIGRP router 4:
+
+Router(config-router)#router ospf 1
+Router(config-router)#network 192.168.2.160 0.0.0.7 area 2
+
+Router(config-router)#router eigrp 80
+Router(config-router)#network 192.168.2.160 0.0.0.7
+Router(config-router)#network 192.168.0.112 0.0.0.7
+Router(config-router)#no auto-summary 
+
+EIGRP router 1:
+Router(config)#router eigrp 80
+Router(config-router)#network 192.168.2.0 0.0.0.63
+Router(config-router)#network 192.168.2.160 0.0.0.7
+Router(config-router)#no auto-summary 
+
+EIGRP router 4:
+
+Router(config)#router ospf 1
+Router(config-router)#redistribute eigrp 80 metric 80 subnet
+Router(config-router)#exit
+
+Router(config)#router eigrp 80
+Router(config-router)#redistribute ospf 1 metric 1500 1000 255 80 1500
+Router(config-router)#exit
+
+----------------------------------------------------------------------------------------------------------------------------------------
+
+EIGRP router 3:
+
+Router(config)#router ospf 1
+Router(config-router)#network 192.168.2.168 0.0.0.7 area 2
+Router(config-router)#exit
+
+Router(config)#router eigrp 70
+Router(config-router)#network 192.168.0.104 0.0.0.7 
+Router(config-router)#network 192.168.2.168 0.0.0.7 
+Router(config-router)#no auto-summary 
+
+EIGRP router 2:
+Router(config)#router eigrp 70
+Router(config-router)#network 192.168.2.64 0.0.0.63
+Router(config-router)#network 192.168.2.168 0.0.0.7
+Router(config-router)#no auto-summary 
